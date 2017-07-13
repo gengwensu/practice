@@ -7,7 +7,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"strings"
 )
 
 var Istr = flag.String("Istr", "abc", "input for str permu")
@@ -23,10 +22,8 @@ func permutation(str string, prefix []byte) {
 		fmt.Println(string(prefix))
 	} else {
 		for i := 0; i < len(str); i++ {
-			t := str[i] //pick ith char
-			s := []string{str[:i], str[i+1:]}
-			rem := strings.Join(s, "")
-			p := append(prefix, t) //move to prefix
+			p := append(prefix, str[i]) //move to prefix
+			rem := str[:i] + str[i+1:]
 			//fmt.Printf("rem is %s and prefix is %s\n", rem, string(p))
 			permutation(rem, p)
 		}
