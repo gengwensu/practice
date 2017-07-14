@@ -1,5 +1,6 @@
 /*
 Is Unique: Implement an algorithm to determine if a string has all unique characters
+The algorithm works with UTF-8 coded string. For ASCII, it could be even simpler.
 */
 package main
 
