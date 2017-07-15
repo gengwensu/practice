@@ -21,10 +21,10 @@ func main() {
 	}
 }
 func isUnique(str string) bool {
-	m := map[byte]int{} //create an empty map
-	for i := 0; i < len(str); i++ {
-		m[str[i]]++
-		if m[str[i]] > 1 {
+	m := map[rune]int{} //create an empty map
+	for _, r := range str {
+		m[r]++
+		if m[r] > 1 {
 			return false
 		}
 	}
