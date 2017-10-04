@@ -25,7 +25,7 @@ func main() {
 			}
 		}
 	}
-	fmt.Printf("Ligitimate words for phone digit %s are: \n", td)
+	fmt.Printf("Legitimate words for phone digit %s are: \n", td)
 	for _, w := range ans {
 		for _, x := range dict {
 			if w == x {
