@@ -1,5 +1,5 @@
 /*
-letterCombofPhoneNumber: a function that prints all combination of a phone number.
+letterCombofPhoneNumber: a function that prints all legitimate words of a phone number against a dictionary.
 */
 package main
 
@@ -18,8 +18,8 @@ func main() {
 	dict := []string{"dog", "dogs", "cat"}
 	//find all substring of input string excluding '0' and '1'
 	l := len(td)
-	for i := 1; i <= l; i++ {
-		for j := 0; j <= l-i; j++ {
+	for i := 1; i <= l; i++ { // length i substring
+		for j := 0; j <= l-i; j++ { //starting from j
 			for _, r := range letterCombinations(td[j : i+j]) {
 				ans = append(ans, r)
 			}
