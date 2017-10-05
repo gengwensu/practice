@@ -9,23 +9,25 @@ import (
 )
 
 var Istr1 = flag.String("Istr1", "234", "input string")
+var pMap = []string{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"} //phone digit mapping
 
 func main() {
 	flag.Parse()
 	fmt.Printf("string1: %s\n", *Istr1)
-	td := *Istr1
+
+	iStr := *Istr1
 	ans := []string{}
 	dict := []string{"dog", "dogs", "cat"}
 	//find all substring of input string excluding '0' and '1'
-	l := len(td)
-	for i := 1; i <= l; i++ { // length i substring
-		for j := 0; j <= l-i; j++ { //starting from j
-			for _, r := range letterCombinations(td[j : i+j]) {
+
+	for sl := 2; sl <= len(iStr); sl++ { // substring length
+		for i := 0; i <= len(iStr)-sl; i++ { //starting from j
+			for _, r := range letterCombinations(iStr[i:i+sl], "") {
 				ans = append(ans, r)
 			}
 		}
 	}
-	fmt.Printf("Legitimate words for phone digit %s are: \n", td)
+	fmt.Printf("Words for phone digit %s are: \n", iStr)
 	for _, w := range ans {
 		for _, x := range dict {
 			if w == x {
@@ -36,24 +38,23 @@ func main() {
 	fmt.Println(" ")
 }
 
-var ret []string
-
-func help(btn []string, str, digits string, idx int) {
-	if idx == len(digits) {
-		ret = append(ret, str)
-		return
-	}
-	tmp := btn[digits[idx]-'0']
-	for _, t := range tmp {
-		help(btn, str+string(t), digits, idx+1)
-	}
-}
-
-func letterCombinations(digits string) []string {
-	btn := []string{" ", " ", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}
-	ret = []string{}
-	if len(digits) > 0 {
-		help(btn, "", digits, 0)
+func letterCombinations(digits, prefix string) []string {
+	ret := []string{}
+	if len(digits) == 1 { //last digit
+		for _, t := range pMap[digits[0]-'0'] {
+			ret = append(ret, prefix+string(t))
+		}
+	} else { // not the lat digit
+		for _, t := range pMap[digits[0]-'0'] {
+			ret = appendArray(ret, letterCombinations(digits[1:], prefix+string(t)))
+		}
 	}
 	return ret
+}
+
+func appendArray(a1, a2 []string) []string {
+	for _, s := range a2 {
+		a1 = append(a1, s)
+	}
+	return a1
 }
