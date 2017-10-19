@@ -17,6 +17,7 @@ func main() {
 func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Remote Hostname = %q\n", r.URL.Host)
 	fmt.Fprintf(w, "Remote Addr = %q\n", r.RemoteAddr)
+	fmt.Fprintf(w, "URL = %q\n", r.URL)
 	fmt.Fprintf(w, "URL.Path = %q\n", r.URL.Path)
 
 	// get client IP address
