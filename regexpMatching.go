@@ -41,7 +41,7 @@ func isMatch(s string, p string) bool {
 		dp[i] = make([]bool, n+1)
 	} // dp[i][j] is the state s[0:i] matches p[0:j]
 
-	dp[0][0] = true
+	dp[0][0] = true    // empty always matches empty
 	for i := range p { // taking care of s="aab", p="c*a*b"
 		if p[i] == '*' && dp[0][i-1] {
 			dp[0][i+1] = true
@@ -53,14 +53,13 @@ func isMatch(s string, p string) bool {
 		for j := 0; j < n; j++ {
 			//fmt.Printf("dp[%d][%d] is %t\n", i, j, dp[i][j])
 			if p[j] != '*' {
-
 				dp[i+1][j+1] = dp[i][j] && (p[j] == '.' || s[i] == p[j])
 				//fmt.Printf("dp[%d][%d] is %t\n", i+1, j+1, dp[i+1][j+1])
 			} else { // '*' case
-				if p[j-1] != s[i] && p[j-1] != '.' { // repeats 0 times
+				if p[j-1] != s[i] && p[j-1] != '.' { // repeats 0 times, roll back 2
 					dp[i+1][j+1] = dp[i+1][j-1]
-				} else { // repeats at least 1 time
-					dp[i+1][j+1] = (dp[i+1][j] || dp[i][j+1] || dp[i+1][j-1])
+				} else { // repeats at least 1 time, multi + single + none
+					dp[i+1][j+1] = (dp[i][j+1] || dp[i+1][j] || dp[i+1][j-1])
 				}
 				//fmt.Printf("dp[%d][%d] is %t\n", i+1, j+1, dp[i+1][j+1])
 			}
