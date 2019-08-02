@@ -47,6 +47,7 @@ func main() {
 			col--
 		}
 		r = append(r, t)
+		col = len(a[0]) - 1
 	}
 	fmt.Printf("The result is %v\n", r)
 }
