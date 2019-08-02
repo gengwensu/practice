@@ -1,5 +1,5 @@
 /*
-hwIOTUI: app to rerieve information based on a time frame and device from hwIOTCollector.
+hwIOTUI: app to retrieve information based on a time frame and device from hwIOTCollector.
 */
 package main
 
