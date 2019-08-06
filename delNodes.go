@@ -6,6 +6,8 @@
  *     Right *TreeNode
  * }
  */
+package main
+
 func delNodes(root *TreeNode, to_delete []int) []*TreeNode {
 	if root == nil {
 		return nil

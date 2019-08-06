@@ -28,6 +28,8 @@ Note:
     M[i][i] = 1 for all students.
     If M[i][j] = 1, then M[j][i] = 1.
 */
+package main
+
 func findCircleNum(M [][]int) int {
 	hm = map[int][]int{}
 	visited = make([]bool, len(M))
